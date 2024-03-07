@@ -1,20 +1,28 @@
-Package: darn
+Package: darn2
 Title: Directed Acyclic R Script Networks
-Version: 0.3-3
-Date: 2016-07-20
-Authors@R: c( person("Kirill", "Müller", role = c("aut", "cre"), email
-        = "krlmlr+r@mailbox.org"), person(family = "R Core team", role
-        = "ctb", comment = "Code for lazy-load databases extracted from
-        tools package") )
-Description: Data pipelines made of R scripts.
-Imports: MakefileR (>= 1.0-2), lazyeval, lazyforward, rprojroot (>=
-        0.1-1), memoise, kimisc, R.utils, purrr, tibble
-Suggests: graph, testthat, withr, devtools, rmarkdown, future, igraph,
-    knitr
-Remotes: krlmlr/lazyforward, krlmlr/rprojroot
-License: GPL-3
+Version: 0.0.9999
+Date: 2023-03-07
+Description: Data pipelines made of R scripts. This is an updated version from the original archived package from
+     Kirill Muller. 
+License: MIT + file LICENSE
 LazyData: true
 Encoding: UTF-8
-GitHub: https://github.com/krlmlr/darn
-RoxygenNote: 5.0.1
+GitHub: https://github.com/qpmnguyen/darn2
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
+Authors@R: 
+    person("Quang", "Nguyen", , "quangpmnguyen@gmail.com", role = "aut")
+Imports: 
+    lazyeval,
+    MakefileR (>= 1.0),
+    memoise,
+    purrr,
+    R.utils,
+    rprojroot (>= 2.0.0),
+    tibble,
+    withr
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

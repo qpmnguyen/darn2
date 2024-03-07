@@ -1,6 +1,21 @@
 # init --------------------------------------------------------------------
-
-init_ <- function(..., .dots = NULL, env_vars = NULL,
+#' Init a stage
+#'
+#' Add a call to this functions as first statement to each of your scripts,
+#' using double-colon notation (\code{darn::init()}).  A script without such a
+#' call is considered to have no prerequisites.
+#'
+#' @param ... [character(1)]\cr
+#'   Prerequisites, without path or extension
+#' @param env_vars \code{[character]}\cr
+#'   Environment variables that define the configuration of the script
+#' @param envir \code{[environment]}\cr
+#'   Environment to load the data into. Default: parent frame.
+#' @param path \code{[character(1)]}\cr
+#'   The path of the current script, useful if automatic detection fails.
+#' @return A named list that contains path information about the current script.
+#' @export
+init <- function(..., .dots = NULL, env_vars = NULL,
                   envir = parent.frame(), path = NULL) {
   path_info <- get_path_info(path)
 
@@ -92,38 +107,11 @@ init_one <- function(r_file_name, deps, path_info, envir) {
   lazyLoad(rdx_base, envir = envir)
 }
 
-#' Init a stage
-#'
-#' Add a call to this functions as first statement to each of your scripts,
-#' using double-colon notation (\code{darn::init()}).  A script without such a
-#' call is considered to have no prerequisites.
-#'
-#' @param ... [character(1)]\cr
-#'   Prerequisites, without path or extension
-#' @param env_vars \code{[character]}\cr
-#'   Environment variables that define the configuration of the script
-#' @param envir \code{[environment]}\cr
-#'   Environment to load the data into. Default: parent frame.
-#' @param path \code{[character(1)]}\cr
-#'   The path of the current script, useful if automatic detection fails.
-#' @return A named list that contains path information about the current script.
-#' @export
-#' @importFrom lazyforward lazyforward
-init <- lazyforward("init_")
 
 
 # done --------------------------------------------------------------------
 
-done_ <- function(..., .dots = NULL, .compress = FALSE) {
-  path_info <- get_path_info()
 
-  dots <- get_done_dots(.dots, ...)
-  vals <- lazyeval::lazy_eval(dots)
-
-  dir.create(path_info$target_dir, showWarnings = FALSE, recursive = TRUE)
-  getMakeLazyLoadDB()(vals, path_info$target_base, compress = .compress)
-  invisible(path_info)
-}
 
 get_done_dots <- function(.dots, ...) {
   lazyeval::all_dots(.dots, ..., all_named = TRUE)
@@ -142,8 +130,16 @@ get_done_dots <- function(.dots, ...) {
 #'   Compress output (default: \code{FALSE})
 #' @return A named list that contains path information about the current script.
 #' @export
-#' @importFrom lazyforward lazyforward
-done <- lazyforward("done_")
+done <- function(..., .dots = NULL, .compress = FALSE) {
+  path_info <- get_path_info()
+
+  dots <- get_done_dots(.dots, ...)
+  vals <- lazyeval::lazy_eval(dots)
+
+  dir.create(path_info$target_dir, showWarnings = FALSE, recursive = TRUE)
+  getMakeLazyLoadDB()(vals, path_info$target_base, compress = .compress)
+  invisible(path_info)
+}
 
 
 # get_target_dir and get_target_path --------------------------------------

@@ -1,4 +1,13 @@
-# darn
+# darn2
+
+**WIP**
+
+This is a planned successor to the original [darn project](https://github.com/krlmlr/darn) by Kirill Muller. 
+The goal of this project is to provide an approach to R workflow management based on scripts. Please refer to the
+[`targets` package](https://books.ropensci.org/targets/) for an approach that is more comprehensive and more idiomatically R. 
+This package is for for individuals who are required to perform script-based analysis due to various reasons.  
+
+Following is the text from the original version: 
 
 The `darn` package allows the definition of Directed Acyclic R script Networks.
 A DARN is a collection of R scripts where each can have a (possibly empty)
@@ -20,16 +29,3 @@ i.e., only does as much as necessary to build the entire project.
 New, modified or deleted scripts are detected,
 and the dependencies are updated accordingly.
 
-
-## Installation
-
-You can install darn from github with:
-
-```R
-# install.packages("devtools")
-devtools::install_github("krlmlr/darn")
-```
-
-## Example
-
-See the "Walkthrough" vignette.

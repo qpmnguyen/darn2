@@ -6,7 +6,7 @@ PACKAGE_NAME <- unname(read.dcf("DESCRIPTION")[1L, "Package"])
 CONFIG_FILE_NAME <- "Darnfile"
 
 #' @importFrom rprojroot has_file
-root_criterion <- has_file(CONFIG_FILE_NAME)
+root_criterion <- rprojroot::has_file(CONFIG_FILE_NAME)
 
 root_file_path <- root_criterion$find_file
 

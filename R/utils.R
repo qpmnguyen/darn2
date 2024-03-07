@@ -29,7 +29,7 @@ relative_to <- function(path, root) {
 # This declaration avoids R CMD check noticing that we are doing naughty things
 # such as calling .Internal().
 #' @importFrom memoise memoise
-getMakeLazyLoadDB <- memoise(function() {
+getMakeLazyLoadDB <- memoise::memoise(function() {
   eval(bquote(function (from, filebase, compress = TRUE, ascii = FALSE,
                         variables) {
     ascii <- as.logical(ascii)
@@ -122,5 +122,18 @@ getMakeLazyLoadDB <- memoise(function() {
 require_suggested <- function(pkg) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop("Please install ", pkg, " package.", call. = FALSE)
+  }
+}
+
+thisFile <- function() {
+  cmdArgs <- commandArgs(trailingOnly = FALSE)
+  needle <- "--file="
+  match <- grep(needle, cmdArgs)
+  if (length(match) > 0) {
+    # Rscript
+    return(normalizePath(sub(needle, "", cmdArgs[match])))
+  } else {
+    # 'source'd via R console
+    return(normalizePath(sys.frames()[[1]]$ofile))
   }
 }

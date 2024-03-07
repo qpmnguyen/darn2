@@ -3,7 +3,7 @@ get_path_info <- function(path = NULL, .get_env_vals = NULL) {
   path <- (
     path
     %||% .darn_env$current_file
-    %||% kimisc::thisfile()
+    %||% thisFile()
   )
 
   if (is.null(path)) {
