@@ -1,6 +1,6 @@
 # darn2
 
-**WIP**
+[![stability-wip](https://img.shields.io/badge/stability-wip-lightgrey.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#work-in-progress)
 
 This is a planned successor to the original [darn project](https://github.com/krlmlr/darn) by Kirill Muller. 
 The goal of this project is to provide an approach to R workflow management based on scripts. Please refer to the
